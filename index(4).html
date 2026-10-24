@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f0e8">
+  <meta name="description" content="Teras Senja — kopi yang diracik pelan, makanan hangat, dan ruang untuk jeda.">
+  <title>Teras Senja — kopi, makanan, dan jeda</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #f4f0e8;
+      --paper-deep: #e9e1d3;
+      --ink: #292a23;
+      --muted: #6f7065;
+      --olive: #4c5638;
+      --olive-dark: #343d27;
+      --clay: #c76543;
+      --line: rgba(41, 42, 35, .16);
+      --white: #fffdf8;
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'DM Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --radius: 20px;
+      --shadow: 0 18px 50px rgba(41, 42, 35, .08);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    img { display: block; width: 100%; object-fit: cover; }
+    .announcement { background: var(--olive-dark); color: #f8f3e9; padding: 9px 20px; text-align: center; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
+    .nav-wrap { position: sticky; z-index: 20; top: 0; background: rgba(244, 240, 232, .94); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+    .nav { max-width: 1200px; margin: auto; min-height: 76px; padding: 0 28px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: inline-flex; align-items: center; gap: 11px; font-weight: 700; letter-spacing: -.04em; font-size: 19px; white-space: nowrap; }
+    .brand-mark { display: grid; place-items: center; height: 37px; width: 37px; background: var(--clay); color: var(--white); border-radius: 50% 50% 50% 10px; font-family: var(--serif); font-size: 21px; font-weight: 600; transform: rotate(-4deg); }
+    .brand small { display: block; font-size: 9px; font-weight: 600; text-transform: uppercase; color: var(--muted); letter-spacing: .17em; margin-top: 2px; }
+    .nav-links { display: flex; align-items: center; gap: 30px; font-size: 12px; font-weight: 600; color: #515247; }
+    .nav-links a:not(.button):hover { color: var(--clay); }
+    .button { border: 0; display: inline-flex; justify-content: center; align-items: center; gap: 10px; padding: 13px 19px; border-radius: 100px; background: var(--olive); color: white; font-weight: 600; font-size: 12px; cursor: pointer; transition: transform .2s ease, background .2s ease; }
+    .button:hover { transform: translateY(-2px); background: var(--olive-dark); }
+    .button.light { background: var(--white); color: var(--ink); border: 1px solid var(--line); }
+    .button.light:hover { background: var(--paper-deep); }
+    .button.clay { background: var(--clay); }
+    .button.clay:hover { background: #ad5435; }
+    .button svg, .inline-link svg { width: 15px; height: 15px; }
+    .menu-toggle { display: none; border: 1px solid var(--line); border-radius: 50%; background: transparent; height: 42px; width: 42px; cursor: pointer; }
+    .menu-toggle span { display:block; width: 16px; height: 1.5px; background: var(--ink); margin: 4px auto; }
+    .hero { max-width: 1200px; margin: auto; padding: 62px 28px 80px; display: grid; grid-template-columns: .91fr 1.09fr; align-items: center; gap: 56px; }
+    .eyebrow { display: flex; align-items: center; gap: 10px; color: var(--clay); font-size: 10px; letter-spacing: .17em; font-weight: 700; text-transform: uppercase; }
+    .eyebrow:before { content: ''; width: 28px; height: 1px; background: var(--clay); }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { margin: 22px 0 21px; max-width: 550px; font: 500 clamp(46px, 5.3vw, 76px)/.99 var(--serif); letter-spacing: -.055em; }
+    h1 em { color: var(--clay); font-weight: 500; }
+    .hero-copy > p { color: var(--muted); max-width: 410px; font-size: 14px; line-height: 1.9; margin-bottom: 28px; }
+    .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+    .hero-note { margin-top: 29px; display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: 11px; }
+    .avatar-stack { display: flex; padding-left: 6px; }
+    .avatar-stack i { display: block; width: 26px; height: 26px; border: 2px solid var(--paper); border-radius: 50%; margin-left: -6px; background-size: cover; background-position: center; }
+    .avatar-stack i:nth-child(1) { background-image: url('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=80&q=80'); }
+    .avatar-stack i:nth-child(2) { background-image: url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=80&q=80'); }
+    .avatar-stack i:nth-child(3) { background-image: url('https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=80&q=80'); }
+    .hero-visual { position: relative; min-height: 510px; }
+    .hero-photo { position: absolute; inset: 0 25px 30px 44px; border-radius: 46% 46% 18px 18px; overflow: hidden; background: #c7b59a; }
+    .hero-photo img { height: 100%; object-position: center; }
+    .photo-chip { position: absolute; left: 0; top: 40%; width: 134px; padding: 16px; background: var(--white); box-shadow: var(--shadow); border-radius: 14px; transform: rotate(-5deg); }
+    .photo-chip span { display: block; font-size: 9px; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); }
+    .photo-chip strong { display: block; margin-top: 7px; font: 500 20px/1.12 var(--serif); }
+    .round-stamp { position: absolute; right: 0; bottom: 0; width: 116px; height: 116px; padding: 16px; display: grid; place-items: center; text-align: center; background: var(--clay); color: white; border-radius: 50%; font-size: 10px; text-transform: uppercase; letter-spacing: .09em; line-height: 1.5; transform: rotate(9deg); }
+    .round-stamp b { display: block; font: 500 24px var(--serif); letter-spacing: -.03em; }
+    .feature-strip { background: var(--paper-deep); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .feature-inner { max-width: 1200px; margin: auto; padding: 23px 28px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .feature { display: flex; align-items: center; justify-content: center; gap: 11px; font-size: 12px; font-weight: 600; }
+    .feature-icon { width: 34px; height: 34px; border: 1px solid rgba(41,42,35,.23); display: grid; place-items: center; border-radius: 50%; color: var(--olive); }
+    .feature-icon svg { width: 17px; height: 17px; }
+    .section { max-width: 1200px; margin: auto; padding: 104px 28px; }
+    .section-heading { display: flex; justify-content: space-between; align-items: end; gap: 30px; margin-bottom: 35px; }
+    .section-heading h2, .story-copy h2, .visit-copy h2 { font: 500 clamp(35px, 4.2vw, 53px)/1.08 var(--serif); letter-spacing: -.045em; margin: 13px 0 0; }
+    .section-heading p { max-width: 345px; color: var(--muted); font-size: 13px; line-height: 1.8; margin: 0 0 3px; }
+    .menu-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 27px; }
+    .filter-button { border: 1px solid var(--line); border-radius: 100px; background: transparent; padding: 10px 16px; color: var(--muted); font-size: 11px; cursor: pointer; transition: .2s; }
+    .filter-button:hover, .filter-button.active { color: white; background: var(--olive); border-color: var(--olive); }
+    .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .menu-card { overflow: hidden; background: var(--white); border-radius: var(--radius); border: 1px solid rgba(41,42,35,.08); transition: transform .22s ease, box-shadow .22s ease; }
+    .menu-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+    .menu-card[hidden] { display: none; }
+    .menu-image { aspect-ratio: 1.34 / 1; position: relative; overflow: hidden; background: var(--paper-deep); }
+    .menu-image img { height: 100%; transition: transform .45s ease; }
+    .menu-card:hover .menu-image img { transform: scale(1.04); }
+    .menu-tag { position: absolute; left: 14px; top: 14px; padding: 7px 10px; border-radius: 100px; background: rgba(255,253,248,.93); color: var(--olive); font-size: 9px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+    .menu-info { padding: 19px 19px 20px; }
+    .menu-title-row { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; }
+    .menu-title-row h3 { font: 500 21px var(--serif); letter-spacing: -.02em; margin: 0; }
+    .price { white-space: nowrap; font-size: 12px; font-weight: 700; color: var(--clay); }
+    .menu-info p { color: var(--muted); font-size: 11px; line-height: 1.65; margin: 10px 0 0; }
+    .menu-bottom { display: flex; justify-content: space-between; align-items: center; margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line); }
+    .menu-bottom span { color: var(--muted); font-size: 10px; }
+    .text-button { border: none; background: transparent; color: var(--olive); padding: 5px 0; font-size: 11px; font-weight: 700; cursor: pointer; }
+    .text-button:hover { color: var(--clay); }
+    .menu-footnote { color: var(--muted); font-size: 10px; margin-top: 20px; }
+    .story { background: var(--olive-dark); color: #f4f0e8; }
+    .story-inner { max-width: 1200px; margin: auto; padding: 90px 28px; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 75px; }
+    .story-visual { display: grid; grid-template-columns: 1.15fr .85fr; align-items: end; gap: 15px; min-height: 430px; }
+    .story-visual img { height: 405px; border-radius: 150px 150px 16px 16px; }
+    .story-visual img:nth-child(2) { height: 275px; border-radius: 16px 16px 110px 110px; margin-bottom: 0; }
+    .story-copy .eyebrow { color: #dca184; }
+    .story-copy .eyebrow:before { background: #dca184; }
+    .story-copy h2 { margin-bottom: 20px; }
+    .story-copy p { color: rgba(244,240,232,.72); line-height: 1.9; font-size: 13px; max-width: 440px; }
+    .story-quote { margin-top: 28px; padding-left: 18px; border-left: 2px solid var(--clay); font: italic 20px/1.4 var(--serif); max-width: 390px; color: #f1d8c8; }
+    .visit { display: grid; grid-template-columns: .87fr 1.13fr; gap: 65px; align-items: center; }
+    .visit-copy h2 { margin-bottom: 18px; }
+    .visit-copy > p { color: var(--muted); font-size: 13px; line-height: 1.8; }
+    .visit-details { margin: 29px 0; border-top: 1px solid var(--line); }
+    .detail-row { display: grid; grid-template-columns: 94px 1fr; gap: 18px; padding: 15px 0; border-bottom: 1px solid var(--line); font-size: 12px; }
+    .detail-row span:first-child { color: var(--muted); }
+    .detail-row span:last-child { line-height: 1.6; }
+    .map-card { min-height: 420px; position: relative; overflow: hidden; border-radius: var(--radius); background: #dcd6c9; box-shadow: var(--shadow); }
+    .map-card img { height: 420px; filter: saturate(.72); }
+    .map-note { position: absolute; left: 18px; right: 18px; bottom: 18px; padding: 20px; border-radius: 13px; background: rgba(255,253,248,.95); display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .map-note strong { display: block; font: 500 21px var(--serif); }
+    .map-note small { display: block; font-size: 10px; color: var(--muted); margin-top: 5px; }
+    .cta-band { background: #e7b39b; }
+    .cta-inner { max-width: 1200px; margin: auto; padding: 48px 28px; display: flex; align-items: center; justify-content: space-between; gap: 30px; }
+    .cta-inner h2 { font: 500 clamp(29px, 3vw, 39px)/1.1 var(--serif); letter-spacing: -.04em; margin: 0 0 8px; }
+    .cta-inner p { font-size: 12px; color: #664536; margin: 0; }
+    footer { background: #25271f; color: #f4f0e8; }
+    .footer-inner { max-width: 1200px; margin: auto; padding: 48px 28px 25px; }
+    .footer-top { display: flex; justify-content: space-between; gap: 30px; align-items: start; padding-bottom: 40px; }
+    .footer-brand { max-width: 295px; }
+    .footer-brand p { margin: 16px 0 0; color: rgba(244,240,232,.62); font-size: 11px; line-height: 1.8; }
+    .footer-links { display: flex; gap: 25px; flex-wrap: wrap; font-size: 11px; color: rgba(244,240,232,.8); }
+    .footer-links a:hover { color: #e7b39b; }
+    .footer-bottom { border-top: 1px solid rgba(244,240,232,.17); padding-top: 19px; display: flex; align-items: center; justify-content: space-between; gap: 15px; color: rgba(244,240,232,.48); font-size: 9px; line-height: 1.6; }
+    .demo-label { color: #e7b39b; }
+    .toast { position: fixed; z-index: 100; left: 50%; bottom: 24px; transform: translate(-50%, 18px); background: var(--ink); color: white; padding: 13px 18px; border-radius: 100px; font-size: 12px; box-shadow: var(--shadow); opacity: 0; pointer-events: none; transition: all .25s; max-width: calc(100% - 32px); text-align: center; }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+    .modal-backdrop { position: fixed; inset: 0; z-index: 90; display: none; place-items: center; padding: 20px; background: rgba(23,24,20,.55); backdrop-filter: blur(4px); }
+    .modal-backdrop.show { display: grid; }
+    .modal { position: relative; width: min(100%, 460px); background: var(--paper); padding: 30px; border-radius: 20px; box-shadow: 0 25px 90px rgba(0,0,0,.25); }
+    .modal-close { position: absolute; right: 15px; top: 15px; height: 34px; width: 34px; border-radius: 50%; border: 1px solid var(--line); background: transparent; font-size: 20px; cursor: pointer; }
+    .modal h3 { font: 500 30px var(--serif); margin: 10px 35px 10px 0; }
+    .modal p { color: var(--muted); font-size: 12px; line-height: 1.75; }
+    .form-row { margin-top: 17px; }
+    .form-row label { display:block; font-size: 11px; font-weight: 700; margin-bottom: 7px; }
+    .form-row input, .form-row textarea { width: 100%; border: 1px solid var(--line); border-radius: 10px; background: var(--white); padding: 12px 13px; outline: none; font-size: 12px; color: var(--ink); }
+    .form-row input:focus, .form-row textarea:focus { border-color: var(--olive); box-shadow: 0 0 0 3px rgba(76,86,56,.11); }
+    .form-row textarea { resize: vertical; min-height: 85px; }
+    .modal .button { width: 100%; margin-top: 18px; }
+    @media (max-width: 900px) {
+      .nav { padding: 0 22px; }
+      .nav-links { gap: 18px; }
+      .hero { padding: 52px 22px 65px; gap: 25px; }
+      .hero-visual { min-height: 440px; }
+      .photo-chip { width: 118px; padding: 13px; }
+      .round-stamp { width: 100px; height: 100px; }
+      .section { padding: 80px 22px; }
+      .story-inner { padding: 80px 22px; gap: 38px; }
+      .story-visual { min-height: 340px; }
+      .story-visual img { height: 340px; }
+      .story-visual img:nth-child(2) { height: 225px; }
+      .visit { gap: 35px; }
+    }
+    @media (max-width: 700px) {
+      .announcement { font-size: 9px; padding: 8px 14px; }
+      .nav { min-height: 66px; padding: 0 18px; }
+      .brand { font-size: 17px; }
+      .brand-mark { width: 34px; height: 34px; }
+      .menu-toggle { display: block; }
+      .nav-links { position: absolute; top: 65px; left: 0; right: 0; padding: 15px 18px 22px; background: var(--paper); border-bottom: 1px solid var(--line); display: none; align-items: stretch; flex-direction: column; gap: 0; box-shadow: 0 15px 20px rgba(41,42,35,.06); }
+      .nav-links.open { display: flex; }
+      .nav-links a:not(.button) { padding: 13px 0; border-bottom: 1px solid var(--line); }
+      .nav-links .button { margin-top: 15px; }
+      .hero { padding: 42px 18px 48px; grid-template-columns: 1fr; gap: 28px; }
+      h1 { font-size: clamp(48px, 13vw, 68px); max-width: 480px; }
+      .hero-copy > p { font-size: 13px; }
+      .hero-visual { min-height: 390px; max-width: 520px; width: 100%; margin: 0 auto; }
+      .hero-photo { inset: 0 19px 25px 33px; }
+      .photo-chip { top: 47%; }
+      .round-stamp { width: 92px; height: 92px; font-size: 8px; }
+      .round-stamp b { font-size: 21px; }
+      .feature-inner { padding: 18px; grid-template-columns: 1fr; gap: 14px; }
+      .feature { justify-content: flex-start; }
+      .section { padding: 65px 18px; }
+      .section-heading { display: block; margin-bottom: 27px; }
+      .section-heading p { margin-top: 15px; }
+      .menu-grid { grid-template-columns: 1fr; gap: 15px; }
+      .menu-card { display: grid; grid-template-columns: 37% 1fr; }
+      .menu-image { height: 100%; min-height: 190px; aspect-ratio: auto; }
+      .menu-tag { left: 8px; top: 8px; font-size: 8px; padding: 6px 8px; }
+      .menu-info { padding: 15px 13px; }
+      .menu-title-row { display: block; }
+      .menu-title-row h3 { font-size: 19px; margin-bottom: 5px; }
+      .menu-info p { margin-top: 9px; font-size: 10px; }
+      .menu-bottom { margin-top: 12px; padding-top: 10px; }
+      .menu-bottom span { font-size: 9px; }
+      .story-inner { padding: 65px 18px; grid-template-columns: 1fr; gap: 38px; }
+      .story-visual { min-height: 330px; }
+      .story-visual img { height: 330px; }
+      .story-visual img:nth-child(2) { height: 225px; }
+      .story-copy h2 { font-size: 42px; }
+      .visit { grid-template-columns: 1fr; gap: 30px; }
+      .map-card, .map-card img { min-height: 325px; height: 325px; }
+      .map-note { left: 12px; right: 12px; bottom: 12px; padding: 15px; }
+      .map-note strong { font-size: 18px; }
+      .map-note .button { padding: 11px 13px; font-size: 10px; }
+      .cta-inner { padding: 36px 18px; flex-direction: column; align-items: flex-start; gap: 22px; }
+      .cta-inner h2 { font-size: 33px; }
+      .footer-inner { padding: 38px 18px 20px; }
+      .footer-top { flex-direction: column; padding-bottom: 28px; }
+      .footer-bottom { align-items: flex-start; flex-direction: column; gap: 6px; }
+      .modal { padding: 25px 20px; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; } }
+  </style>
+</head>
+<body>
+  <div class="announcement">Kopi yang baik · obrolan yang panjang · hari yang sedikit lebih pelan</div>
+  <div class="nav-wrap">
+    <nav class="nav" aria-label="Navigasi utama">
+      <a class="brand" href="#beranda" aria-label="Teras Senja, beranda">
+        <span class="brand-mark">t.</span><span>Teras Senja<small>coffee · kitchen · stories</small></span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Buka menu" aria-expanded="false"><span></span><span></span></button>
+      <div class="nav-links" id="navLinks">
+        <a href="#menu">Menu</a>
+        <a href="#cerita">Cerita kami</a>
+        <a href="#kunjungi">Kunjungi</a>
+        <button class="button" data-open-order>Pesan meja <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 5l7 7-7 7"/></svg></button>
+      </div>
+    </nav>
+  </div>
+
+  <main>
+    <section class="hero" id="beranda">
+      <div class="hero-copy">
+        <div class="eyebrow">Tempat singgah favoritmu</div>
+        <h1>Hari boleh sibuk. Kopi <em>jangan buru-buru.</em></h1>
+        <p>Ruang kecil untuk kopi yang diracik dengan serius, makanan yang datang hangat, dan obrolan yang tidak perlu melihat jam.</p>
+        <div class="hero-actions">
+          <a class="button" href="#menu">Lihat menu <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          <a class="button light" href="#kunjungi">Cara ke sini</a>
+        </div>
+        <div class="hero-note">
+          <div class="avatar-stack" aria-hidden="true"><i></i><i></i><i></i></div>
+          <span>Datang sendiri boleh. Datang ramai-ramai juga boleh.</span>
+        </div>
+      </div>
+      <div class="hero-visual" aria-label="Suasana kedai kopi">
+        <div class="hero-photo"><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1200&q=85" alt="Secangkir kopi dan perlengkapan seduh di meja kayu" fetchpriority="high"></div>
+        <div class="photo-chip"><span>Diseduh setiap hari</span><strong>Good coffee,<br>good company.</strong></div>
+        <div class="round-stamp"><span>Take a little<br>breather<b>↘</b></span></div>
+      </div>
+    </section>
+
+    <section class="feature-strip" aria-label="Keunggulan Teras Senja">
+      <div class="feature-inner">
+        <div class="feature"><span class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 9h13v7a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V9Z"/><path d="M17 11h1a3 3 0 0 1 0 6h-2M8 5c-1 1-1 2 0 3M12 4c-1 1-1 2 0 3"/></svg></span> Kopi diracik setelah dipesan</div>
+        <div class="feature"><span class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 10h16M6 10V6h12v4M5 10l1 10h12l1-10M9 14h6"/></svg></span> Makanan sederhana, dibuat segar</div>
+        <div class="feature"><span class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s7-4.4 7-11a7 7 0 0 0-14 0c0 6.6 7 11 7 11Z"/><circle cx="12" cy="10" r="2.3"/></svg></span> Ruang nyaman untuk singgah</div>
+      </div>
+    </section>
+
+    <section class="section" id="menu">
+      <div class="section-heading">
+        <div><div class="eyebrow">Dari bar dan dapur</div><h2>Yang sering jadi<br>pilihan pertama.</h2></div>
+        <p>Menu dibuat untuk menemani banyak suasana—mulai dari pagi yang butuh tenaga sampai sore yang ingin sedikit lebih santai.</p>
+      </div>
+      <div class="menu-filters" role="group" aria-label="Filter menu">
+        <button class="filter-button active" data-filter="semua" aria-pressed="true">Semua menu</button>
+        <button class="filter-button" data-filter="kopi" aria-pressed="false">Kopi</button>
+        <button class="filter-button" data-filter="non-kopi" aria-pressed="false">Non-kopi</button>
+        <button class="filter-button" data-filter="makanan" aria-pressed="false">Makanan</button>
+      </div>
+      <div class="menu-grid" id="menuGrid">
+        <article class="menu-card" data-category="kopi">
+          <div class="menu-image"><img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=800&q=80" alt="Es kopi susu dengan lapisan kopi dan susu" loading="lazy"><span class="menu-tag">Favorit</span></div>
+          <div class="menu-info"><div class="menu-title-row"><h3>Kopi Susu Senja</h3><span class="price">Rp22.000</span></div><p>Espresso, susu segar, dan gula aren dengan rasa yang seimbang.</p><div class="menu-bottom"><span>Es · Kopi</span><button class="text-button" data-order-item="Kopi Susu Senja">Pesan ↗</button></div></div>
+        </article>
+        <article class="menu-card" data-category="kopi">
+          <div class="menu-image"><img src="https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?auto=format&fit=crop&w=800&q=80" alt="Kopi hitam yang disajikan dalam cangkir" loading="lazy"><span class="menu-tag">Klasik</span></div>
+          <div class="menu-info"><div class="menu-title-row"><h3>Long Black</h3><span class="price">Rp18.000</span></div><p>Espresso dan air panas. Bersih, ringan, dan tetap berkarakter.</p><div class="menu-bottom"><span>Panas · Kopi</span><button class="text-button" data-order-item="Long Black">Pesan ↗</button></div></div>
+        </article>
+        <article class="menu-card" data-category="non-kopi">
+          <div class="menu-image"><img src="https://images.unsplash.com/photo-1515823064-d6e0c04616a7?auto=format&fit=crop&w=800&q=80" alt="Minuman matcha dingin dengan susu" loading="lazy"></div>
+          <div class="menu-info"><div class="menu-title-row"><h3>Iced Matcha</h3><span class="price">Rp24.000</span></div><p>Matcha dengan susu lembut untuk kamu yang ingin jeda dari kopi.</p><div class="menu-bottom"><span>Es · Non-kopi</span><button class="text-button" data-order-item="Iced Matcha">Pesan ↗</button></div></div>
+        </article>
+        <article class="menu-card" data-category="makanan">
+          <div class="menu-image"><img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=800&q=80" alt="Roti panggang dan hidangan sarapan" loading="lazy"><span class="menu-tag">Sarapan</span></div>
+          <div class="menu-info"><div class="menu-title-row"><h3>Roti Panggang</h3><span class="price">Rp25.000</span></div><p>Roti panggang renyah dengan telur dan pilihan topping sederhana.</p><div class="menu-bottom"><span>Makanan</span><button class="text-button" data-order-item="Roti Panggang">Pesan ↗</button></div></div>
+        </article>
+        <article class="menu-card" data-category="makanan">
+          <div class="menu-image"><img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80" alt="Pizza tipis untuk dinikmati bersama" loading="lazy"></div>
+          <div class="menu-info"><div class="menu-title-row"><h3>Flatbread</h3><span class="price">Rp32.000</span></div><p>Adonan tipis, topping gurih, cocok untuk teman ngobrol sore.</p><div class="menu-bottom"><span>Makanan</span><button class="text-button" data-order-item="Flatbread">Pesan ↗</button></div></div>
+        </article>
+        <article class="menu-card" data-category="non-kopi">
+          <div class="menu-image"><img src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=800&q=80" alt="Teh dingin dengan es dan daun mint" loading="lazy"></div>
+          <div class="menu-info"><div class="menu-title-row"><h3>Teh Lemon</h3><span class="price">Rp16.000</span></div><p>Teh yang diseduh segar, lemon, dan sedikit rasa manis.</p><div class="menu-bottom"><span>Es · Non-kopi</span><button class="text-button" data-order-item="Teh Lemon">Pesan ↗</button></div></div>
+        </article>
+      </div>
+      <p class="menu-footnote">Harga dan menu pada halaman ini merupakan contoh demo dan dapat disesuaikan dengan usaha sebenarnya.</p>
+    </section>
+
+    <section class="story" id="cerita">
+      <div class="story-inner">
+        <div class="story-visual">
+          <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=900&q=80" alt="Interior kafe hangat dengan meja dan kursi kayu" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=700&q=80" alt="Barista menyiapkan kopi dengan perlahan" loading="lazy">
+        </div>
+        <div class="story-copy">
+          <div class="eyebrow">Sedikit tentang kami</div>
+          <h2>Bukan cuma mampir. Semoga betah.</h2>
+          <p>Kami percaya tempat yang enak tidak harus ramai oleh banyak hal. Cukup kopi yang dibuat dengan perhatian, makanan yang terasa akrab, dan orang-orang yang menyambutmu dengan tulus.</p>
+          <p>Mau buka laptop, ngobrol panjang, atau duduk sebentar sebelum pulang—silakan. Kami siapkan tempatnya.</p>
+          <div class="story-quote">“Kadang yang dibutuhkan cuma tempat yang pas dan satu cangkir yang enak.”</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="kunjungi">
+      <div class="visit">
+        <div class="visit-copy">
+          <div class="eyebrow">Sampai ketemu di sini</div>
+          <h2>Meja sudah menunggu.</h2>
+          <p>Rencanakan kunjunganmu atau hubungi kami kalau mau memastikan tempat tersedia.</p>
+          <div class="visit-details">
+            <div class="detail-row"><span>Lokasi</span><span>Banda Aceh<br><small style="color:var(--muted)">Alamat demo — sesuaikan sebelum dipublikasikan</small></span></div>
+            <div class="detail-row"><span>Jam buka</span><span>Setiap hari<br>09.00 – 22.00 WIB</span></div>
+            <div class="detail-row"><span>Suasana</span><span>Santai, ramah laptop, cocok untuk ngobrol</span></div>
+          </div>
+          <button class="button" data-open-order>Hubungi kami <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 5l7 7-7 7"/></svg></button>
+        </div>
+        <div class="map-card">
+          <img src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?auto=format&fit=crop&w=1200&q=80" alt="Area duduk kafe yang hangat" loading="lazy">
+          <div class="map-note"><div><strong>Temukan sudut favoritmu.</strong><small>Lokasi dan petunjuk arah akan diperbarui sesuai alamat usaha.</small></div><a class="button light" href="https://maps.google.com/?q=kafe+Banda+Aceh" target="_blank" rel="noopener noreferrer">Buka peta ↗</a></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="cta-inner"><div><h2>Ketemu sebentar, tinggal lebih lama.</h2><p>Ajak temanmu. Kopinya kami siapkan.</p></div><button class="button" data-open-order>Rencanakan kunjungan ↗</button></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand"><a class="brand" href="#beranda"><span class="brand-mark">t.</span><span>Teras Senja<small style="color:rgba(244,240,232,.55)">coffee · kitchen · stories</small></span></a><p>Kopi yang diracik dengan serius, makanan yang datang hangat, dan ruang untuk melepas penat.</p></div>
+        <div class="footer-links"><a href="#menu">Menu</a><a href="#cerita">Cerita kami</a><a href="#kunjungi">Lokasi & jam buka</a><button class="text-button" style="color:#e7b39b" data-open-order>Kontak</button></div>
+      </div>
+      <div class="footer-bottom"><span>© <span id="year"></span> Teras Senja. Konten pada demo dapat disesuaikan.</span><span class="demo-label">Website demo konsep · dibuat oleh NEX Project</span></div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="modal-backdrop" id="orderModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal">
+      <button class="modal-close" id="modalClose" aria-label="Tutup dialog">×</button>
+      <div class="eyebrow">Sapa kami</div>
+      <h3 id="modalTitle">Ada yang bisa kami siapkan?</h3>
+      <p>Isi pesan singkat. Karena ini versi demo, pesan akan disiapkan untuk disalin dan nomor WhatsApp tujuan perlu diatur sebelum website digunakan oleh bisnis sungguhan.</p>
+      <form id="contactForm">
+        <div class="form-row"><label for="customerName">Nama</label><input id="customerName" name="name" placeholder="Nama kamu" required maxlength="80"></div>
+        <div class="form-row"><label for="customerMessage">Pesan</label><textarea id="customerMessage" name="message" placeholder="Halo, saya ingin bertanya tentang..." required maxlength="600"></textarea></div>
+        <button class="button" type="submit">Siapkan pesan WhatsApp ↗</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // SETUP SEBELUM WEBSITE DIPAKAI KLIEN:
+    // Isi nomor WhatsApp usaha dengan format internasional tanpa + atau spasi, contoh 62812XXXXXXXX.
+    const WHATSAPP_NUMBER = '';
+
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    const toast = document.getElementById('toast');
+    const modal = document.getElementById('orderModal');
+    const messageField = document.getElementById('customerMessage');
+    let toastTimer;
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+    menuToggle.addEventListener('click', () => {
+      const opened = navLinks.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', String(opened));
+      menuToggle.setAttribute('aria-label', opened ? 'Tutup menu' : 'Buka menu');
+    });
+    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      navLinks.classList.remove('open'); menuToggle.setAttribute('aria-expanded', 'false');
+    }));
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 3600);
+    }
+    function openModal(item = '') {
+      if (item) messageField.value = `Halo, saya ingin memesan/bertanya tentang ${item}. Apakah masih tersedia?`;
+      modal.classList.add('show');
+      document.body.style.overflow = 'hidden';
+      setTimeout(() => document.getElementById('customerName').focus(), 80);
+    }
+    function closeModal() {
+      modal.classList.remove('show');
+      document.body.style.overflow = '';
+    }
+    document.querySelectorAll('[data-open-order]').forEach(button => button.addEventListener('click', () => openModal()));
+    document.querySelectorAll('[data-order-item]').forEach(button => button.addEventListener('click', () => openModal(button.dataset.orderItem)));
+    document.getElementById('modalClose').addEventListener('click', closeModal);
+    modal.addEventListener('click', event => { if (event.target === modal) closeModal(); });
+    document.addEventListener('keydown', event => { if (event.key === 'Escape') closeModal(); });
+
+    document.getElementById('contactForm').addEventListener('submit', async event => {
+      event.preventDefault();
+      const name = document.getElementById('customerName').value.trim();
+      const message = messageField.value.trim();
+      const text = `Halo, saya ${name}. ${message}`;
+      if (WHATSAPP_NUMBER) {
+        window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
+        closeModal();
+        return;
+      }
+      try {
+        await navigator.clipboard.writeText(text);
+        showToast('Pesan demo disalin. Atur nomor WhatsApp tujuan sebelum dipublikasikan.');
+      } catch (_) {
+        messageField.value = text;
+        messageField.focus();
+        messageField.select();
+        showToast('Salin pesan ini secara manual. Nomor WhatsApp demo belum diatur.');
+      }
+      closeModal();
+    });
+
+    document.querySelectorAll('[data-filter]').forEach(button => button.addEventListener('click', () => {
+      const filter = button.dataset.filter;
+      document.querySelectorAll('[data-filter]').forEach(item => {
+        const active = item === button;
+        item.classList.toggle('active', active);
+        item.setAttribute('aria-pressed', String(active));
+      });
+      document.querySelectorAll('.menu-card').forEach(card => {
+        card.hidden = filter !== 'semua' && card.dataset.category !== filter;
+      });
+    }));
+  </script>
+</body>
+</html>
